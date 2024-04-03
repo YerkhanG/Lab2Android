@@ -4,6 +4,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface DogService {
-    @GET("dogs?name=dog")
+    @GET("v1/dogs?name=golden retriever")
     fun fetchOfferList() : Call<List<DogApi>>
 }

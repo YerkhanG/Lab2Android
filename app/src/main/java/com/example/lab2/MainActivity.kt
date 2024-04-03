@@ -12,7 +12,6 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
 
-// MainActivity.kt
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

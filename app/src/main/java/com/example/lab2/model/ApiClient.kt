@@ -1,5 +1,6 @@
 package com.example.lab2.model
 
+import com.example.lab2.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,8 +11,9 @@ object ApiClient {
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor{ chain ->
             val request = chain.request()
+            val apiKey = BuildConfig.API_KEY
             val newRequest = request.newBuilder()
-                .addHeader("X-Api-Key","AaXhBdO+vyLHblES4vsMxQ==AzwB8IH5NQbqb3w8")
+                .addHeader("X-Api-Key",apiKey)
                 .build()
             chain.proceed(newRequest)
         }
@@ -19,7 +21,7 @@ object ApiClient {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://api.api-ninjas.com/v1/")
+        .baseUrl("https://api.api-ninjas.com/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

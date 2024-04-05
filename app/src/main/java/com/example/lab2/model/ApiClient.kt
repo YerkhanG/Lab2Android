@@ -9,16 +9,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
 
     private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor{ chain ->
+        .addInterceptor { chain ->
             val request = chain.request()
             val apiKey = BuildConfig.API_KEY
             val newRequest = request.newBuilder()
-                .addHeader("X-Api-Key",apiKey)
+                .addHeader("X-Api-Key", apiKey)
                 .build()
             chain.proceed(newRequest)
         }
         .addInterceptor(
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        )
         .build()
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://api.api-ninjas.com/")

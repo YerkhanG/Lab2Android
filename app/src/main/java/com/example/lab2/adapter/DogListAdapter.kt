@@ -4,20 +4,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.lab2.R
 import com.example.lab2.databinding.ItemDogBinding
 import com.example.lab2.model.Dog
 
 class DogListAdapter : ListAdapter<Dog, DogListAdapter.ViewHolder>(DogItemCallBack()) {
     inner class ViewHolder(
-        private val binding : ItemDogBinding
-    ) : RecyclerView.ViewHolder(binding.root){
-        fun bind(dog : Dog){
+        private val binding: ItemDogBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(dog: Dog) {
 
             with(binding) {
+                Glide
+                    .with(root.context)
+                    .load(dog.imageLink)
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .into(dogImage)
                 dogName.text = dog.name
-                maxLifeExp.text = dog.maxLifeExpectancy.toString()
-                minLifeExp.text = dog.minLifeExpectancy.toString()
-                goodWithChildren.text = dog.goodWithChildren.toString()
+                maxLifeExp.text = "Maximum life expectancy: " +  dog.maxLifeExpectancy.toString()
+                minLifeExp.text = "Minimum life expectancy: " +dog.minLifeExpectancy.toString()
+                goodWithChildren.text = "How its with children: " +dog.goodWithChildren.toString()
             }
         }
     }
